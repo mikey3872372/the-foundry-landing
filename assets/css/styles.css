@@ -38,7 +38,7 @@
   --gradient-copper: linear-gradient(135deg, #B87333 0%, #8B5A2B 100%);
   --gradient-forge: linear-gradient(135deg, #FF4500 0%, #FF6B35 50%, #FFD700 100%);
   --gradient-molten: linear-gradient(45deg, #FF4500, #FF6B35, #FFD700, #FF4500);
-  --gradient-industrial-overlay: linear-gradient(135deg, rgba(15, 15, 15, 0.6) 0%, rgba(44, 44, 44, 0.4) 50%, rgba(255, 69, 0, 0.1) 100%);
+  --gradient-industrial-overlay: linear-gradient(135deg, rgba(15, 15, 15, 0.3) 0%, rgba(44, 44, 44, 0.2) 50%, rgba(255, 69, 0, 0.1) 100%);
   
   /* Typography */
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -489,14 +489,18 @@ ul {
   width: 100%;
   height: 100%;
   z-index: 1;
+  background: url('../images/ai-renderings/hero-rendering.webp') center center/cover no-repeat, #2C2C2C;
 }
 
 .hero-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: contrast(1.2) brightness(1.0);
-  display: block;
+  filter: contrast(1.2) brightness(1.1);
+  display: none;
+  opacity: 1;
+  z-index: 1;
+  position: relative;
 }
 
 .hero-overlay {
