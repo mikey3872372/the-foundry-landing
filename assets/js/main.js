@@ -6,8 +6,11 @@ document.addEventListener('DOMContentLoaded', function() {
     initLightbox();
     initSmoothScrolling();
     initScrollEffects();
+    initForgeEffects();
+    initButtonSounds();
+    initCountdownTimer();
     
-    console.log('The Foundry landing page initialized');
+    console.log('🔥 The Foundry: Industrial Revolution Initialized 🔥');
 });
 
 // ===== NAVIGATION FUNCTIONALITY =====
@@ -318,13 +321,242 @@ function announceToScreenReader(message) {
     }, 1000);
 }
 
+// ===== FORGE SOUND EFFECTS =====
+function initButtonSounds() {
+    const buttons = document.querySelectorAll('.btn');
+    
+    buttons.forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            // Create hover sound effect
+            playForgeSound('hover');
+        });
+        
+        button.addEventListener('click', function() {
+            // Create click sound effect
+            playForgeSound('click');
+            
+            // Add hammer strike effect
+            this.classList.add('hammer-strike');
+            setTimeout(() => {
+                this.classList.remove('hammer-strike');
+            }, 200);
+        });
+    });
+}
+
+function playForgeSound(type) {
+    // Using Web Audio API to create forge-like sound effects
+    try {
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioContext.createOscillator();
+        const gainNode = audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(audioContext.destination);
+        
+        if (type === 'hover') {
+            oscillator.frequency.setValueAtTime(800, audioContext.currentTime);
+            gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+        } else if (type === 'click') {
+            oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(200, audioContext.currentTime + 0.1);
+            gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.2);
+        }
+        
+        oscillator.type = 'sawtooth';
+        oscillator.start(audioContext.currentTime);
+        oscillator.stop(audioContext.currentTime + 0.2);
+    } catch (e) {
+        // Fallback for browsers that don't support Web Audio API
+        console.log('Forge sound effect: ' + type);
+    }
+}
+
+// ===== INDUSTRIAL FORGE EFFECTS =====
+function initForgeEffects() {
+    // Add spark particles on scroll
+    let sparkTimeout;
+    
+    window.addEventListener('scroll', function() {
+        clearTimeout(sparkTimeout);
+        sparkTimeout = setTimeout(() => {
+            createSpark();
+        }, 100);
+    });
+    
+    // Create floating spark particles
+    function createSpark() {
+        const spark = document.createElement('div');
+        spark.className = 'forge-spark';
+        spark.style.cssText = `
+            position: fixed;
+            width: 4px;
+            height: 4px;
+            background: radial-gradient(circle, #FFD700, #FF4500);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            left: ${Math.random() * window.innerWidth}px;
+            top: ${Math.random() * window.innerHeight}px;
+            animation: sparkle 2s ease-out forwards;
+        `;
+        
+        document.body.appendChild(spark);
+        
+        setTimeout(() => {
+            if (spark.parentNode) {
+                spark.parentNode.removeChild(spark);
+            }
+        }, 2000);
+    }
+    
+    // Add forge spark animation to CSS
+    const sparkStyle = document.createElement('style');
+    sparkStyle.textContent = `
+        @keyframes sparkle {
+            0% {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+                box-shadow: 0 0 10px #FFD700;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0.1) translateY(-100px);
+                box-shadow: 0 0 5px #FF4500;
+            }
+        }
+        
+        .hammer-strike {
+            animation: hammerStrike 0.2s ease-out;
+        }
+        
+        @keyframes hammerStrike {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.95); }
+            100% { transform: scale(1); }
+        }
+        
+        .forge-glow {
+            animation: forgeGlow 3s ease-in-out infinite alternate;
+        }
+    `;
+    document.head.appendChild(sparkStyle);
+    
+    // Add dramatic entrance animations
+    const heroTitle = document.querySelector('.hero-title');
+    if (heroTitle) {
+        setTimeout(() => {
+            heroTitle.style.animation = 'forgeGlow 3s ease-in-out infinite alternate, heroFadeIn 1.2s ease-out';
+        }, 500);
+    }
+}
+
+// ===== COUNTDOWN TIMER =====
+function initCountdownTimer() {
+    // Set target date to January 1, 2026
+    const targetDate = new Date('2026-01-01T00:00:00').getTime();
+    
+    function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+        
+        if (distance > 0) {
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            
+            // Update DOM elements with forge-like effects
+            const daysEl = document.getElementById('countdown-days');
+            const hoursEl = document.getElementById('countdown-hours');
+            const minutesEl = document.getElementById('countdown-minutes');
+            
+            if (daysEl) daysEl.textContent = days.toString().padStart(3, '0');
+            if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+            if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+            
+            // Add spark effect every minute
+            if (minutes !== updateCountdown.lastMinute) {
+                updateCountdown.lastMinute = minutes;
+                createCountdownSpark();
+            }
+        } else {
+            // The Foundry has opened!
+            const countdownContainer = document.querySelector('.countdown-container');
+            if (countdownContainer) {
+                countdownContainer.innerHTML = `
+                    <h3 style="color: var(--molten-gold); font-size: var(--font-size-2xl);">
+                        🔥 THE FOUNDRY IS NOW OPEN! 🔥
+                    </h3>
+                `;
+            }
+        }
+    }
+    
+    function createCountdownSpark() {
+        const timer = document.querySelector('.countdown-timer');
+        if (!timer) return;
+        
+        const spark = document.createElement('div');
+        spark.style.cssText = `
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, #FFD700, #FF4500);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10;
+            animation: countdownSpark 1s ease-out forwards;
+        `;
+        
+        const rect = timer.getBoundingClientRect();
+        spark.style.left = (rect.left + rect.width / 2) + 'px';
+        spark.style.top = (rect.top + rect.height / 2) + 'px';
+        
+        document.body.appendChild(spark);
+        
+        setTimeout(() => {
+            if (spark.parentNode) {
+                spark.parentNode.removeChild(spark);
+            }
+        }, 1000);
+    }
+    
+    // Add countdown spark animation
+    const countdownStyle = document.createElement('style');
+    countdownStyle.textContent = `
+        @keyframes countdownSpark {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+                box-shadow: 0 0 10px #FFD700;
+            }
+            100% {
+                opacity: 0;
+                transform: scale(3) translateY(-50px);
+                box-shadow: 0 0 20px #FF4500;
+            }
+        }
+    `;
+    document.head.appendChild(countdownStyle);
+    
+    // Update countdown immediately, then every second
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+}
+
 // Export functions for use in other modules
 window.FoundryApp = {
     initNavigation,
     initLightbox,
     initSmoothScrolling,
     initScrollEffects,
+    initForgeEffects,
+    initButtonSounds,
+    initCountdownTimer,
     debounce,
     throttle,
-    announceToScreenReader
+    announceToScreenReader,
+    playForgeSound
 };

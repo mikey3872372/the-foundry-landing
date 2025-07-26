@@ -9,7 +9,12 @@
   }
   
   .hero-title {
-    font-size: var(--font-size-4xl);
+    font-size: var(--font-size-5xl);
+  }
+  
+  .hero-title::before {
+    top: -50px;
+    font-size: var(--font-size-lg);
   }
   
   .hero-subtitle {
@@ -68,12 +73,24 @@
   
   /* Hero */
   .hero {
-    height: 80vh;
-    min-height: 500px;
+    height: 85vh;
+    min-height: 600px;
+  }
+  
+  .hero-image {
+    object-position: center center;
+    transform: scale(1.1);
   }
   
   .hero-title {
-    font-size: var(--font-size-3xl);
+    font-size: var(--font-size-4xl);
+  }
+  
+  .hero-title::before {
+    top: -45px;
+    font-size: var(--font-size-base);
+    left: 50%;
+    transform: translateX(-50%);
   }
   
   .hero-subtitle {
@@ -162,9 +179,26 @@
   }
   
   /* Typography adjustments */
+  .hero {
+    height: 90vh;
+    min-height: 500px;
+  }
+  
+  .hero-image {
+    object-position: center top;
+    transform: scale(1.2);
+  }
+  
   .hero-title {
-    font-size: var(--font-size-2xl);
-    line-height: 1.2;
+    font-size: var(--font-size-3xl);
+    line-height: 1.1;
+  }
+  
+  .hero-title::before {
+    top: -35px;
+    font-size: var(--font-size-sm);
+    left: 50%;
+    transform: translateX(-50%);
   }
   
   .hero-subtitle {
@@ -296,13 +330,25 @@
   
   /* Hero */
   .hero {
-    height: 70vh;
-    min-height: 400px;
+    height: 80vh;
+    min-height: 450px;
+  }
+  
+  .hero-image {
+    object-position: center top;
+    transform: scale(1.3);
   }
   
   .hero-title {
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-2xl);
     margin-bottom: var(--spacing-sm);
+  }
+  
+  .hero-title::before {
+    top: -25px;
+    font-size: var(--font-size-xs);
+    left: 50%;
+    transform: translateX(-50%);
   }
   
   .hero-subtitle {
@@ -412,8 +458,22 @@
     padding: 0 var(--spacing-xs);
   }
   
+  .hero {
+    height: 75vh;
+    min-height: 400px;
+  }
+  
+  .hero-image {
+    object-position: center top;
+    transform: scale(1.4);
+  }
+  
   .hero-title {
-    font-size: var(--font-size-lg);
+    font-size: var(--font-size-xl);
+  }
+  
+  .hero-title::before {
+    display: none;
   }
   
   .hero-subtitle {
