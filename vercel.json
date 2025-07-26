@@ -1,6 +1,9 @@
 {
   "version": 2,
   "name": "the-foundry-landing",
+  "buildCommand": "",
+  "outputDirectory": ".",
+  "installCommand": "",
   "headers": [
     {
       "source": "/assets/(.*)",
