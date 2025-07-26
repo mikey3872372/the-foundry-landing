@@ -1,0 +1,41 @@
+{
+  "name": "the-foundry-landing",
+  "version": "1.0.0",
+  "description": "Landing page for The Foundry - Northwest Arkansas's premier fitness and lifestyle complex",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve . -l 3000",
+    "build": "npm run optimize-images && npm run minify-css && npm run minify-js",
+    "optimize-images": "echo 'Image optimization would run here'",
+    "minify-css": "npx clean-css-cli assets/css/*.css -o assets/css/styles.min.css",
+    "minify-js": "npx terser assets/js/*.js -o assets/js/scripts.min.js",
+    "deploy": "vercel --prod",
+    "preview": "vercel",
+    "lighthouse": "npx lighthouse http://localhost:3000 --output=html --output-path=./lighthouse-report.html"
+  },
+  "keywords": [
+    "fitness",
+    "gym",
+    "northwest-arkansas",
+    "wellness",
+    "lifestyle",
+    "landing-page"
+  ],
+  "author": "The Foundry Team",
+  "license": "UNLICENSED",
+  "private": true,
+  "devDependencies": {
+    "clean-css-cli": "^5.6.1",
+    "terser": "^5.16.1",
+    "serve": "^14.2.0",
+    "lighthouse": "^10.4.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
