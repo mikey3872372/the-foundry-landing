@@ -489,19 +489,9 @@ ul {
   width: 100%;
   height: 100%;
   z-index: 1;
-  background: url('./assets/images/ai-renderings/hero-rendering.webp') center center/cover no-repeat, #2C2C2C;
+  background: url('../images/ai-renderings/hero-rendering.webp') center center/cover no-repeat, #2C2C2C;
 }
 
-.hero-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: contrast(1.2) brightness(1.1);
-  display: none;
-  opacity: 1;
-  z-index: 1;
-  position: relative;
-}
 
 .hero-overlay {
   position: absolute;
