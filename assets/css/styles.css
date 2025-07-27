@@ -38,7 +38,7 @@
   --gradient-copper: linear-gradient(135deg, #B87333 0%, #8B5A2B 100%);
   --gradient-forge: linear-gradient(135deg, #FF4500 0%, #FF6B35 50%, #FFD700 100%);
   --gradient-molten: linear-gradient(45deg, #FF4500, #FF6B35, #FFD700, #FF4500);
-  --gradient-industrial-overlay: linear-gradient(135deg, rgba(15, 15, 15, 0.3) 0%, rgba(44, 44, 44, 0.2) 50%, rgba(255, 69, 0, 0.1) 100%);
+  --gradient-industrial-overlay: linear-gradient(135deg, rgba(15, 15, 15, 0.7) 0%, rgba(44, 44, 44, 0.5) 50%, rgba(255, 69, 0, 0.1) 100%);
   
   /* Typography */
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -98,7 +98,7 @@
   /* Forge Effects */
   --glow-forge: 0 0 20px rgba(255, 69, 0, 0.6), 0 0 40px rgba(255, 107, 53, 0.4), 0 0 60px rgba(255, 215, 0, 0.2);
   --glow-steel: 0 0 10px rgba(64, 64, 64, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  --text-forge: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 69, 0, 0.3);
+  --text-forge: 2px 2px 8px rgba(0, 0, 0, 0.9), 0 0 20px rgba(0, 0, 0, 0.7), 0 0 10px rgba(255, 69, 0, 0.3);
 }
 
 /* ===== RESET & BASE STYLES ===== */
@@ -571,7 +571,7 @@ ul {
   max-width: 750px;
   line-height: 1.7;
   font-weight: 400;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8), 0 0 20px rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(1px);
 }
 
@@ -660,6 +660,27 @@ ul {
   background: var(--gradient-copper);
   border-radius: 2px;
   box-shadow: var(--glow-forge);
+}
+
+.message-image {
+  margin: var(--spacing-2xl) 0;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-2xl), var(--glow-forge);
+  border: 2px solid var(--copper);
+}
+
+.message-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: contrast(1.1) brightness(1.0);
+  transition: var(--transition-base);
+}
+
+.message-image:hover img {
+  transform: scale(1.02);
+  filter: contrast(1.2) brightness(1.05);
 }
 
 .message-content p {
